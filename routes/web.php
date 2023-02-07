@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RedirectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,32 +24,59 @@ Route::get('/about', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard',[DashboardController::class, 'index'])->middleware('auth');
-Route::get('/listkoordinator',[KoordinatorController::class, 'index']);
-Route::get('/listpimpinan',[KoordinatorController::class, 'index2']);
-Route::get('/listprogrammer',[KoordinatorController::class, 'index3']);
-Route::get('/listbpa',[KoordinatorController::class, 'index4']);
-Route::get('/login',[LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login',[LoginController::class, 'authenticate']);
-Route::post('/logout',[LoginController::class, 'logout']);
+//---semua route disini bisa dilakukan meskipun user belum login---
+    Route::get('/',[LoginController::class, 'index']);
+
+    Route::get('/login',[LoginController::class, 'index'])->name('login')->middleware('guest');
+    Route::post('/login',[LoginController::class, 'authenticate']);
+    Route::post('/logout',[LoginController::class, 'logout']);
 
 
-// Route CRUD USER
-Route::post('/register',[RegisterController::class, 'store']);
-Route::get('/edit/{id}',[RegisterController::class, 'edit']);
-Route::post('/update/{id}',[RegisterController::class, 'update']);
-Route::get('/delete/{id}',[RegisterController::class, 'destroy']);
+    // Route CRUD USER
+    Route::post('/register',[RegisterController::class, 'store']);
+    Route::get('/edit/{id}',[RegisterController::class, 'edit']);
+    Route::post('/update/{id}',[RegisterController::class, 'update']);
+    Route::get('/delete/{id}',[RegisterController::class, 'destroy']);
 
 
-// Route CRUD PROJECT
-Route::post('/create',[ProjectController::class, 'store']);
+    // Route CRUD PROJECT
+    Route::post('/create',[ProjectController::class, 'store']);
 
-// Route CRUD PROGRAMMER
-Route::post('/detailverifikasi/programmer/{id}',[ProjectController::class, 'addprog']);
-Route::get('/detailverifikasi/programmer/$id/{id}',[ProjectController::class, 'destroy']);
+    // Route CRUD PROGRAMMER
+    Route::post('/detailverifikasi/programmer/{id}',[ProjectController::class, 'addprog']);
+    Route::get('/detailverifikasi/programmer/$id/{id}',[ProjectController::class, 'destroy']);
 
-// Route CRUD FITUR
-Route::post('/detailverifikasi/fitur/{id}',[ProjectController::class, 'addfit']);
-Route::get('/detailverifikasi/fitur/$id/{id}',[ProjectController::class, 'destroyfit']);
-Route::get('/projectpage',[KoordinatorController::class, 'viewproject']);
-Route::get('/detailverifikasi/{id}',[KoordinatorController::class, 'show']);
+    // Route CRUD FITUR
+    Route::post('/detailverifikasi/fitur/{id}',[ProjectController::class, 'addfit']);
+    Route::get('/detailverifikasi/fitur/$id/{id}',[ProjectController::class, 'destroyfit']);
+    Route::get('/projectpage',[KoordinatorController::class, 'viewproject']);
+    Route::get('/detailverifikasi/{id}',[KoordinatorController::class, 'show']);
+
+
+    Route::get('/progresview',[KoordinatorController::class, 'progresdetail']);
+    Route::get('/redirect', [RedirectController::class, 'cek']);
+    Route::get('/detailproject',[KoordinatorController::class, 'project']);
+
+//---batas akhir route bisa dilakukan meskipun user belum login---
+
+
+//semua route disini hanya bisa dilakukan bila login dengan akun koordinator / BPA
+Route::group(['middleware' => ['auth','checkrole:koordinator,BPA']],function(){
+    Route::get('/koordinator',[DashboardController::class, 'koor']);
+    Route::get('/BPA',[DashboardController::class, 'BPA'])->middleware('auth');
+    Route::get('/listkoordinator',[KoordinatorController::class, 'index']);
+    Route::get('/listpimpinan',[KoordinatorController::class, 'index2']);
+    Route::get('/listprogrammer',[KoordinatorController::class, 'index3']);
+    Route::get('/listbpa',[KoordinatorController::class, 'index4']);
+});
+
+//semua route disini hanya bisa dilakukan bila login dengan akun programmer
+Route::group(['middleware' => ['auth','checkrole:programmer']],function(){
+    Route::get('/programmer',[DashboardController::class, 'prog'])->middleware('auth');
+});
+
+//semua route disini hanya bisa dilakukan bila login dengan akun pimpinan
+Route::group(['middleware' => ['auth','checkrole:pimpinan']],function(){
+    Route::get('/pimpinan',[DashboardController::class, 'pimpinan'])->middleware('auth');
+});
+

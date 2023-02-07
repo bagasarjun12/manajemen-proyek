@@ -16,9 +16,19 @@ class LoginController extends Controller
         'password' => 'required'
         ]);
 
+        
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+        
+                if(auth()->user()->role === "programmer"){
+                    return redirect()->intended('/programmer');
+                }elseif(auth()->user()->role === "koordinator"){
+                    return redirect()->intended('/koordinator');
+                }elseif(auth()->user()->role === "BPA"){
+                    return redirect()->intended('/BPA');
+                }elseif(auth()->user()->role === "pimpinan"){
+                    return redirect()->intended('/pimpinan');
+                }
         }
         print_r($credentials);
         return back()->with('loginError', 'Login Failed!');
