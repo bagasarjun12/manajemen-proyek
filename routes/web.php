@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\KoordinatorController;
+use App\Http\Controllers\ProgrammerController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RedirectController;
 
@@ -25,7 +26,6 @@ Route::get('/about', function () {
 });
 
 //---semua route disini bisa dilakukan meskipun user belum login---
-    Route::get('/',[LoginController::class, 'index']);
 
     Route::get('/login',[LoginController::class, 'index'])->name('login')->middleware('guest');
     Route::post('/login',[LoginController::class, 'authenticate']);
@@ -63,7 +63,7 @@ Route::get('/about', function () {
 //semua route disini hanya bisa dilakukan bila login dengan akun koordinator / BPA
 Route::group(['middleware' => ['auth','checkrole:koordinator,BPA']],function(){
     Route::get('/koordinator',[DashboardController::class, 'koor']);
-    Route::get('/BPA',[DashboardController::class, 'BPA'])->middleware('auth');
+    Route::get('/BPA',[DashboardController::class, 'BPA']);
     Route::get('/listkoordinator',[KoordinatorController::class, 'index']);
     Route::get('/listpimpinan',[KoordinatorController::class, 'index2']);
     Route::get('/listprogrammer',[KoordinatorController::class, 'index3']);
@@ -72,11 +72,13 @@ Route::group(['middleware' => ['auth','checkrole:koordinator,BPA']],function(){
 
 //semua route disini hanya bisa dilakukan bila login dengan akun programmer
 Route::group(['middleware' => ['auth','checkrole:programmer']],function(){
-    Route::get('/programmer',[DashboardController::class, 'prog'])->middleware('auth');
+    Route::get('/programmer',[DashboardController::class, 'prog']);
+    Route::get('/progreslist',[ProgrammerController::class, 'progres']);
+    Route::get('/progresdetail',[ProgrammerController::class, 'detail']);
 });
 
 //semua route disini hanya bisa dilakukan bila login dengan akun pimpinan
 Route::group(['middleware' => ['auth','checkrole:pimpinan']],function(){
-    Route::get('/pimpinan',[DashboardController::class, 'pimpinan'])->middleware('auth');
+    Route::get('/pimpinan',[DashboardController::class, 'pimpinan']);
 });
 

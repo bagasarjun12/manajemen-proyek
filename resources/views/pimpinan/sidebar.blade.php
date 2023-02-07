@@ -149,7 +149,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/projectpage">
+            <a class="nav-link" href="/changepass">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Ubah Password</span>
             </a>

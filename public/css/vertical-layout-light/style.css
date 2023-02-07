@@ -30593,3 +30593,68 @@ div.tagsinput span.tag a {
 }
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
+
+.subtitle-space{
+  margin-bottom: 30px;
+  margin-left: 40px;
+}
+
+.table-detailproject{
+  width: 100%;
+}
+
+.table-detailproject td{
+  width: 60%;
+}
+
+.table-detailproject td:nth-child(2){
+  justify-content: flex-end;
+  vertical-align: top;
+}
+
+.status-panel{
+  width: 200px;
+  text-align: center;
+}
+
+.title-margin{
+  margin-bottom: 40px;
+}
+
+.color-text{
+  color: blue;
+}
+
+.link-decoration{
+  text-decoration:none;
+  font-size: 17px;
+  padding-bottom: 10px;
+}
+
+.description-text{
+  text-align: justify;
+}
+
+.right-page-text{
+  width: 200px;
+  text-align: left;
+  
+}
+
+.ul-text{
+  font-size: 16px;
+}
+
+.color-warning{
+  color: orange;
+}
+
+.image-adjust{
+  width: 800px;
+  height: 500px;
+}
+
+.projectdetail-table{
+  width: 650px;
+}
+
