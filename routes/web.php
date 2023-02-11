@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -75,6 +76,8 @@ Route::group(['middleware' => ['auth','checkrole:programmer']],function(){
     Route::get('/programmer',[DashboardController::class, 'prog']);
     Route::get('/progreslist',[ProgrammerController::class, 'progres']);
     Route::get('/progresdetail',[ProgrammerController::class, 'detail']);
+    Route::get('/changepass',[AccountController::class, 'index']);
+    Route::get('/confirmpass',[AccountController::class, 'confirmpass']);
 });
 
 //semua route disini hanya bisa dilakukan bila login dengan akun pimpinan
