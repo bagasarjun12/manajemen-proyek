@@ -62,3 +62,5 @@ function displayfile(){
     // console.log('file didrop di drag area');
 };
 
+
+
