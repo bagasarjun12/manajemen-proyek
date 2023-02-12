@@ -30659,6 +30659,9 @@ div.tagsinput span.tag a {
 }
 
 #NewPass2{
-  color: red;
-  
+  color: red; 
+}
+
+#SamePass{
+  color: red; 
 }

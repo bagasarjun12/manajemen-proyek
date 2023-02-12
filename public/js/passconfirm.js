@@ -1,6 +1,6 @@
 var button = document.getElementById("buttonconfirm");
 
-document.getElementById("InputNewPass2").onclick = function () {
+document.getElementById("InputNewPass2").oninput = function () {
     document.getElementById("InputNewPass1").onkeyup = validatePassword;
     document.getElementById("InputNewPass2").onkeyup = validatePassword;
 }

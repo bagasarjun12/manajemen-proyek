@@ -166,6 +166,12 @@
               </ul>
             </div>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/changepass">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Ubah Password</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <div class="main-panel">

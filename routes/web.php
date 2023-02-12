@@ -61,6 +61,15 @@ Route::get('/about', function () {
 //---batas akhir route bisa dilakukan meskipun user belum login---
 
 
+//semua route disini hanya bisa dilakukan oleh semua role
+Route::group(['middleware' => ['auth']],function(){
+        //Route Ganti Password
+        Route::get('/changepass',[AccountController::class, 'index']);
+        Route::post('/confirmpass',[AccountController::class, 'confirmpass']);
+
+        //
+});
+
 //semua route disini hanya bisa dilakukan bila login dengan akun koordinator / BPA
 Route::group(['middleware' => ['auth','checkrole:koordinator,BPA']],function(){
     Route::get('/koordinator',[DashboardController::class, 'koor']);
@@ -76,8 +85,6 @@ Route::group(['middleware' => ['auth','checkrole:programmer']],function(){
     Route::get('/programmer',[DashboardController::class, 'prog']);
     Route::get('/progreslist',[ProgrammerController::class, 'progres']);
     Route::get('/progresdetail',[ProgrammerController::class, 'detail']);
-    Route::get('/changepass',[AccountController::class, 'index']);
-    Route::post('/confirmpass',[AccountController::class, 'confirmpass']);
 });
 
 //semua route disini hanya bisa dilakukan bila login dengan akun pimpinan
