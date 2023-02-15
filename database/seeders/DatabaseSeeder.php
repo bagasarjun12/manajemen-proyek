@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Project;
+use App\Models\Fitur;
 
 class DatabaseSeeder extends Seeder
 {
@@ -27,6 +28,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'evaniatrafika@gmail.com',
             'password' => bcrypt('12345'),
             'no_hp' => '083143149772',
+            'jumlah_kinerja' => '0',
+            'role' => 'koordinator'
+        ]);
+        User::create([
+            'name' => 'Budi Tabuti',
+            'email' => 'budi@gmail.com',
+            'password' => bcrypt('12345'),
+            'no_hp' => '087632632132',
             'jumlah_kinerja' => '0',
             'role' => 'koordinator'
         ]);

@@ -10,6 +10,7 @@ use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\ProgrammerController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RedirectController;
+use App\Models\Programmer;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,12 @@ Route::get('/about', function () {
     return view('welcome');
 });
 
+
+
 //---semua route disini bisa dilakukan meskipun user belum login---
 
     Route::get('/login',[LoginController::class, 'index'])->name('login')->middleware('guest');
+    Route::get('/',[LoginController::class, 'index'])->name('login')->middleware('guest');
     Route::post('/login',[LoginController::class, 'authenticate']);
     Route::post('/logout',[LoginController::class, 'logout']);
 
@@ -84,7 +88,8 @@ Route::group(['middleware' => ['auth','checkrole:koordinator,BPA']],function(){
 Route::group(['middleware' => ['auth','checkrole:programmer']],function(){
     Route::get('/programmer',[DashboardController::class, 'prog']);
     Route::get('/progreslist',[ProgrammerController::class, 'progres']);
-    Route::get('/progresdetail',[ProgrammerController::class, 'detail']);
+    Route::get('/progresdetail/{id}',[ProgrammerController::class, 'detail']);
+    Route::post('/updateprogres/{id}',[ProgrammerController::class, 'update']);
 });
 
 //semua route disini hanya bisa dilakukan bila login dengan akun pimpinan

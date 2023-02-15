@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('jenis', ['sim', 'perizinan']);
             $table->text('deskripsi');
             $table->string('pengaju');
+            $table->string('persentase')->nullable();
             $table->date('target');
             $table->date('mulai');
             $table->date('selesai')->nullable();

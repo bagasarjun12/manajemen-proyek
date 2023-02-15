@@ -1,6 +1,13 @@
 @extends('programmer/sidebar')
 @section('konten')
 
+@if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show col-lg-8" role="alert">
+                  {{session('success')}}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" arial-label="close"></button>
+                </div>
+    @endif
+
 <div class="detail-project"> 
     <table class="table-detailproject">
       <tr>
@@ -92,10 +99,7 @@
                         Nama Fitur
                       </th>
                       <th>
-                        Tanggal Update
-                      </th>
-                      <th>
-                        Nama
+                        Nama Programmer
                       </th>
                       <th>
                         
@@ -103,159 +107,91 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($fiturs as $fiturs)
                     <tr>
                         <td>
-                          Login
+                          {{ $fiturs->nama_fitur }}
                         </td>
                         <td>
                           -
                         </td>
                         <td>
-                          Bagas tarangga
-                        </td>
-                        <td>
-                          {{-- <a href="{{url('/edit')}}/{{$user->id}}" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalAdd"> --}}
-                            <a href="" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalAdd">
-
+                            <a href="" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal{{$fiturs->id}}">
                             Update</a>
-                        </td>
+                          </td>
+                          <!-- Modal -->
+<div class="modal fade modal-lg" id="Modal{{$fiturs->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header content-wrapper">
+        <h5 class="modal-title" id="staticBackdropLabel">Update Progres</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body content-wrapper">
+                    <div class="card ">
+                      <div class="card-body">
+                        <form class="forms-sample" action="{{url('/updateprogres')}}/{{$fiturs->id}}" method="POST">
+                          @csrf
+                          <div class="form-group">
+                          <div class="form-floating">
+                            <input type="text" class="form-control" name="name" id="namefitur" placeholder="Name" disabled value="{{$fiturs->nama_fitur}}">
+                            <label for="floatingInput" class="modal-title">Nama Fitur</label>
+                          </div>
+                          </div>
+                          <div class="form-group">
+                          <div class="form-floating">
+                            <input type="text" class="form-control" name="ket" id="ket" placeholder="text" required>
+                            <label for="floatingInput">Keterangan</label>
+                          </div>
+                          </div>
+                          <div class="form-group">
+                          <div class="form-floating">
+                            <input type="text" class="form-control" name="linkgit" id="linkgit" placeholder="Password" required>
+                            <label for="floatingInput">Link Github</label>
+                          </div>
+                          </div>
+
+                          <div class="container">
+                            <h5>Upload Gambar</h5>
+
+                            <div class="mb-3">
+                              <input class="form-control" type="file" name="inputimg" id="inputimg" onchange="displayfile()" required>
+                            </div>
+                            
+                            <div class="drag-area">
+                              <div class="icon">
+                                <i class="fa fa-images"></i>
+                              </div>
+                              <span class="header"> Picture Preview Here </span>
+                              <span class="support">Support : JEPG, JPG, PNG</span>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                                <input type="hidden" class="form-control" name="jumlah_kinerja" id="jumlah_kinerja" value="0">
+                          </div>
+                          <div class="form-group">
+                              <input type="hidden" class="form-control" name="role" id="role" value="BPA">
+                        </div>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button type="submit" class="btn btn-primary me-md-2">Submit</button>
+                          <button class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+  </div>
+  </div>
+</div>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
             </div>
         </div>
   </div>
-
-
-   <!-- Modal -->
-  <div class="modal fade modal-lg" id="ModalAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header content-wrapper">
-          <h5 class="modal-title" id="staticBackdropLabel">Update Progres</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body content-wrapper">
-                      <div class="card ">
-                        <div class="card-body">
-                          <form class="forms-sample" action="" method="POST">
-                            @csrf
-                            <div class="form-group">
-                            <div class="form-floating">
-                              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Name" disabled value="Fitur Login" required>
-                              <label for="floatingInput">Nama Fitur</label>
-                            </div>
-                            </div>
-                            <div class="form-group">
-                            <div class="form-floating">
-                              <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                              <label for="floatingInput">Keterangan</label>
-                            </div>
-                            </div>
-                            <div class="form-group">
-                            <div class="form-floating">
-                              <input type="text" class="form-control" name="password" id="password" placeholder="Password" required>
-                              <label for="floatingInput">Link Github</label>
-                            </div>
-                            </div>
-
-                            <div class="container">
-                              <h3>Upload Gambar</h3>
-                              <div class="drag-area">
-                                <div class="icon">
-                                  <i class="fa fa-images"></i>
-                                </div>
-
-                                <span class="header"> Drag & Drop </span>
-                                <span class="header">or <span class="button"> Browse </span></span>
-                                <input type="file" hidden name="inputimg" class="inputimg" id="inputimg" />
-                                <span class="support">Support : JEPG, JPG, PNG</span>
-
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                                  <input type="hidden" class="form-control" name="jumlah_kinerja" id="jumlah_kinerja" value="0">
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" name="role" id="role" value="BPA">
-                          </div>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="submit" class="btn btn-primary me-md-2">Submit</button>
-                            <button class="btn btn-danger">Cancel</button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-    </div>
-    </div>
-  </div>
-  <div class="modal fade modal-lg" id="ModalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header content-wrapper">
-          <h5 class="modal-title" id="staticBackdropLabel">Form Edit User</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body content-wrapper">
-            <div class="card ">
-              <div class="card-body">
-                {{-- <form class="forms-sample" action="{{url('/update')}}/{{$user->id}}" method="POST"> --}}
-                  <form class="forms-sample" action="" method="POST">
-
-                  @csrf
-                  <div class="form-group">
-                  <div class="form-floating">
-                    {{-- <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{$user->name}}" required> --}}
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="name" required>
-
-                    <label for="floatingInput">Nama</label>
-                  </div>
-                  </div>
-                  <div class="form-group">
-                  <div class="form-floating">
-                    {{-- <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}" required> --}}
-                    <input type="email" class="form-control" name="email" id="email" value="email" required>
-
-                    <label for="floatingInput">Email address</label>
-                  </div>
-                  </div>
-                  <div class="form-group">
-                  <div class="form-floating">
-                    {{-- <input type="password" class="form-control" name="password" id="password" value="{{$user->password}}" required> --}}
-                    <input type="password" class="form-control" name="password" id="password" value="password" required>
-
-                    <label for="floatingInput">Password</label>
-                  </div>
-                  </div>
-                  <div class="form-group">
-                      <div class="form-floating">
-                        {{-- <input type="text" class="form-control" name="no_hp" id="no_hp" value="{{$user->no_hp}}" required> --}}
-                        <input type="text" class="form-control" name="no_hp" id="no_hp" value="no hp" required>
-
-                        <label for="floatingInput">No. Handphone</label>
-                  </div>
-                  </div>
-                  <div class="form-group">
-                        {{-- <input type="hidden" class="form-control" name="jumlah_kinerja" id="jumlah_kinerja" value="{{$user->jumlah_kinerja}}"> --}}
-                        <input type="hidden" class="form-control" name="jumlah_kinerja" id="jumlah_kinerja" value="jumlah kinerja">
-
-                  </div>
-                  <div class="form-group">
-                      {{-- <input type="hidden" class="form-control" name="role" id="role" value="{{$user->role}}"> --}}
-                      <input type="hidden" class="form-control" name="role" id="role" value="role">
-
-                </div>
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <button type="submit" class="btn btn-primary me-md-2">Update</button>
-                  <button type="reset" class="btn btn-danger">Reset</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-                    </div>
+  
     </div>
 </div>
 

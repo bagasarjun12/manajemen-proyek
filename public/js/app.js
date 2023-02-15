@@ -1,14 +1,9 @@
 const dragArea= document.querySelector('.drag-area');
 const dragText = document.querySelector('.header');
 
-let browse = document.querySelector('.button');
-let input = document.querySelector('.inputimg');
+let input = document.querySelector('#inputimg');
 
 let file;
-
-browse.onclick = () => {
-    input.click();
-}
 
 //saat browse file
 input.addEventListener('change', function(){
@@ -17,28 +12,28 @@ input.addEventListener('change', function(){
     displayfile();
 });
 
-//saat file didalam drag area
-dragArea.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    dragText.textContent = 'Release to Upload';
-    dragArea.classList.add('active');
-    // console.log('file ada didalam drag area');
-});
+// //saat file didalam drag area
+// dragArea.addEventListener('dragover', (event) => {
+//     event.preventDefault();
+//     dragText.textContent = 'Release to Upload';
+//     dragArea.classList.add('active');
+//     // console.log('file ada didalam drag area');
+// });
 
-// saat file meninggalkan drag area
-dragArea.addEventListener('dragleave', () => {
-dragText.textContent = 'Drag & Drop';
-    // console.log('file ada diluar drag area'); 
-});
+// // saat file meninggalkan drag area
+// dragArea.addEventListener('dragleave', () => {
+// dragText.textContent = 'Drag & Drop';
+//     // console.log('file ada diluar drag area'); 
+// });
 
-//saat file di drop di drag area
-dragArea.addEventListener('drop', (event) => {
-    event.preventDefault();
+// //saat file di drop di drag area
+// dragArea.addEventListener('drop', (event) => {
+//     event.preventDefault();
 
-    file = event.dataTransfer.files[0];
-    // console.log(file);
-    displayfile();
-});
+//     file = event.dataTransfer.files[0];
+//     // console.log(file);
+//     displayfile();
+// });
 
 function displayfile(){
     let fileType = file.type;
