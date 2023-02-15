@@ -32,7 +32,7 @@
               </ul>
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                    <form class="forms-sample" action="/detailverifikasi/programmer/{id}" method="POST">
+                    <form class="forms-sample" action="{{url('/detailverifikasi/programmer/')}}/{{$projects->id}}" method="POST">
                         @csrf
                         <div class="form-group col-lg-6">
                             <select class="form-control" id="user_id" name="user_id" required>
@@ -78,7 +78,7 @@
                       </table>
                 </div>
                 <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                    <form class="forms-sample" action="/detailverifikasi/fitur/{id}" method="POST" enctype="multipart/form-data">
+                    <form class="forms-sample" action="{{url('/detailverifikasi/fitur/')}}/{{$projects->id}}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <input type="hidden" class="form-control" name="user_id" id="user_id" value="{{auth()->user()->id}}">

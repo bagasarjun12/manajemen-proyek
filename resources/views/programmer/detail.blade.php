@@ -8,6 +8,7 @@
                 </div>
     @endif
 
+    
 <div class="detail-project"> 
     <table class="table-detailproject">
       <tr>
