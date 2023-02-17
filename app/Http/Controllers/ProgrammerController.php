@@ -22,7 +22,9 @@ class ProgrammerController extends Controller
 
     public function detail($id){
         return view('programmer.detail',[
-            'fiturs' => Fitur::where('project_id',"$id")->get()
+            'fiturs' => Fitur::where('project_id',"$id")->get(),
+            'projects' => Project::where('id',"$id")->get()
+
         ]
         );
     }

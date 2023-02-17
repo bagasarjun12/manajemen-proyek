@@ -19,6 +19,7 @@
         </td>
         <td rowspan="2">
           <div class="card bg-warning mb-3 float-right status-panel">
+            @foreach ($projects as $project)
             <div class="card-header">
               <b>Status</b>
             </div>
@@ -32,7 +33,7 @@
         <td>
           <div class="subtitle-space">
           <h5> Nama Aplikasi </h5>
-          <div>Project 1</div>
+          <div> {{ $project->nama_project }}</div>
         </div>
         </td>
       </tr>
@@ -40,15 +41,10 @@
         <td>
           <div class="subtitle-space">
             <h5> Deskripsi </h5>
-            <div class="description-text"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore possimus explicabo consequuntur 
-              corrupti beatae! Rem sed necessitatibus quo quas in aliquam voluptatem commodi molestiae iste aspernatur! 
-              Pariatur itaque obcaecati a! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis consequuntur
-               debitis fugit quasi blanditiis. A reprehenderit saepe quod rerum natus consequuntur totam, reiciendis tenetur,
-                magni odit, recusandae voluptas iure eaque? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut,
-                 voluptates eaque vel itaque vero laboriosam beatae? Accusantium velit enim, fugit ullam accusamus architecto 
-                 nobis dolores praesentium iure. Nobis, quo voluptatem.</div>
+            <div class="description-text">{{ $project->deskripsi }} </div>
         </div>
         </td>
+        @endforeach
         <td rowspan="2">
           <div class="float-right right-page-text">
               <h5>Tim Programmer</h5>
@@ -65,11 +61,9 @@
           <div class="subtitle-space">
             <h5> Fitur - Fitur </h5>
             <ul>
-              <li><div class="ul-text">Login</div></li>
-              <li><div class="ul-text">Register</div></li>
-              <li><div class="ul-text">Homepage Menu</div></li>
-              <li><div class="ul-text">Buat Ajuan</div></li>
-              <li><div class="ul-text">Cek Riwayat Ajuan</div></li>
+              @foreach ($fiturs as $fitur_name)
+              <li><div class="ul-text">{{ $fitur_name->nama_fitur }}</div></li>
+              @endforeach
             </ul>
           </div>
         </td>
@@ -85,6 +79,7 @@
           </div>
         </td>
       </tr>
+      
     </table>
 
 </div>

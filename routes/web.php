@@ -60,7 +60,7 @@ Route::get('/about', function () {
 
     Route::get('/progresview',[KoordinatorController::class, 'progresdetail']);
     Route::get('/redirect', [RedirectController::class, 'cek']);
-    Route::get('/detailproject',[KoordinatorController::class, 'project']);
+    
 
 //---batas akhir route bisa dilakukan meskipun user belum login---
 
@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth']],function(){
         //Route Ganti Password
         Route::get('/changepass',[AccountController::class, 'index']);
         Route::post('/confirmpass',[AccountController::class, 'confirmpass']);
-
+        Route::get('/detailproject',[KoordinatorController::class, 'project']);
         //
 });
 

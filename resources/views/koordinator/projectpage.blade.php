@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 <a type="button" class="btn btn-warning" href="{{url('/detailverifikasi')}}/{{$project->id}}" ><i class="icon-plus menu-icon" style="color: black"></i></a>
-                                <button type="button" class="btn btn-info"><i class="icon-eye menu-icon" style="color: black"></i></button>
+                                <a type="button" class="btn btn-info" href="{{url('/detailproject')}}" ><i class="icon-eye menu-icon" style="color: black"></i></a>
                                 <button type="button" class="btn btn-danger"><i class="icon-trash menu-icon" style="color: black"></i></button>
                             </td>
                         </tr>
