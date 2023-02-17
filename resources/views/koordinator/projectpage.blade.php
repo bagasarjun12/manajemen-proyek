@@ -103,8 +103,8 @@
                             </div>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" id="jenis" name="jenis" required>
-                                  <option selected disabled>Pilih Jenis Project</option>
+                                <select class="form-control" id="jenis" name="jenis" style="color: black" required>
+                                  <option selected disabled value="">Pilih Jenis Project</option>
                                   <option value="sim">Sistem Informasi Manajemen</option>
                                   <option value="perizinan">Layanan Perizinan</option>
                                 </select>

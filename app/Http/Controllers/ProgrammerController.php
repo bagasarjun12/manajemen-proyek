@@ -15,7 +15,7 @@ class ProgrammerController extends Controller
         return view('programmer.progres',[
             'projects' => Project::where('status',"verifikasi")->get()
         ],[
-            'project_finish' => Project::where('persentase',"100%")->get()
+            'project_finish' => Project::where('status',"finish")->get()
         ]
         );
     }
@@ -23,8 +23,8 @@ class ProgrammerController extends Controller
     public function detail($id){
         return view('programmer.detail',[
             'fiturs' => Fitur::where('project_id',"$id")->get(),
-            'projects' => Project::where('id',"$id")->get()
-
+            'projects' => Project::where('id',"$id")->get(),
+            'programmer' => Programmer::where('project_id',"$id")->get()
         ]
         );
     }
@@ -34,6 +34,8 @@ class ProgrammerController extends Controller
         $fitur->keterangan   = $request['ket'];
         $fitur->link_git  = $request['linkgit'];
         $fitur->gambar   = $request['inputimg'];
+        $fitur->uploader = $request['user'];
+        $fitur->tgl_update = date("Y/m/d h:i:s");
         $fitur->save();
 
         return redirect()->back()->with('success', 'Progres Berhasil Diupdate!!');

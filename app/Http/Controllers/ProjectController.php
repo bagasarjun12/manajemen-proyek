@@ -28,6 +28,7 @@ class ProjectController extends Controller
           return redirect()->back()->with('success', 'Project Successfully Created!!');
      }
      public function addprog(Request $request){
+        
         $validateData = $request->validate([
             'user_id' => 'required',
             'project_id' => 'required'
@@ -38,7 +39,7 @@ class ProjectController extends Controller
      public function destroy($id){
         $post   = Programmer::find($id);
         $post->delete();
-         return redirect()->back()->with('success', 'Programmer has been deleteed!!');
+         return redirect()->back()->with('success', 'Programmer has been deleted!!');
     }
     public function addfit(Request $request){
         $validateData = $request->validate([

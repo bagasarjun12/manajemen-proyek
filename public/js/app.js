@@ -53,6 +53,7 @@ function displayfile(){
     } else {
         alert('Harap Upload File Berupa Gambar');
         dragArea.classList.remove('active');
+        document.getElementById('#inputimg').value = '';
     }
     // console.log('file didrop di drag area');
 };

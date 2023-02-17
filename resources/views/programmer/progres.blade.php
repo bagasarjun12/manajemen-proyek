@@ -35,23 +35,23 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach ($project_finish as $project)
+                            @foreach ($projects as $project)
                             <tr>
                                 <td>
-                                    {{ $project_finish->nama_project }} 
+                                    {{ $project->nama_project }} 
                                 </td>
                                 <td>
-                                  {{ $project_finish->target }}
+                                  {{ $project->target }}
                                 </td>
                                 <td>
-                                  {{ $project_finish->jenis }}
+                                  {{ $project->jenis }}
                                 </td>
                                 <td align="center">
-                                  {{ $project_finish->persentase }}
+                                  {{ $project->persentase }}
                               </td>
                                 <td>
                                     {{-- <a href="{{url('/edit')}}/{{$user->id}}" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModalEdit"> --}}
-                                      <a href="{{url('/progresdetail')}}/{{$project_finish->id}}" type="button" class="btn btn-primary">
+                                      <a href="{{url('/progresdetail')}}/{{$project->id}}" type="button" class="btn btn-primary">
                                         Detail</a>
                                 </td>
                             </tr>
@@ -88,23 +88,23 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($projects as $project)
+                      @foreach ($project_finish as $project_finish)
                       <tr>
                           <td>
-                              {{ $project->nama_project }} 
+                              {{ $project_finish->nama_project }} 
                           </td>
                           <td>
-                            {{ $project->target }}
+                            {{ $project_finish->target }}
                           </td>
                           <td>
-                            {{ $project->jenis }}
+                            {{ $project_finish->jenis }}
                           </td>
                           <td align="center">
-                            {{ $project->persentase }}
+                            {{ $project_finish->persentase }}
                         </td>
                           <td>
                               {{-- <a href="{{url('/edit')}}/{{$user->id}}" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModalEdit"> --}}
-                                <a href="{{url('/progresdetail')}}/{{$project->id}}" type="button" class="btn btn-primary">
+                                <a href="{{url('/progresdetail')}}/{{$project_finish->id}}" type="button" class="btn btn-primary">
                                   Detail</a>
                           </td>
                       </tr>

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('keterangan')->nullable();
             $table->string('link_git')->nullable();
             $table->string('gambar')->nullable();
+            $table->string('uploader')->nullable();
+            $table->dateTime('tgl_update')->nullable();
             $table->timestamps();
         });
     }

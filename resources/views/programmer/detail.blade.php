@@ -24,7 +24,14 @@
               <b>Status</b>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item color-text"><div class="color-text"><b>Proses</b></div></li>
+                <?php
+                if($project->status = "verifikasi"){
+                  ?><li class="list-group-item color-text"><div class="color-blue"><b>Pengembangan</b></div></li> <?php
+                }elseif($project->selesai = "finish"){
+                  ?><li class="list-group-item color-text"><div class="color-green"><b>Selesai</b></div></li> <?php
+                } 
+                ?>
+                
             </ul>
           </div>
         </td>
@@ -49,9 +56,9 @@
           <div class="float-right right-page-text">
               <h5>Tim Programmer</h5>
             <ul>
-              <li><div class="ul-text">Evania Trafika</div></li>
-              <li><div class="ul-text">Muhammad Rangga Saputra</div></li>
-              <li><div class="ul-text">Bagas Tarangga</div></li>
+              @foreach ($programmer as $programmer)
+              <li><div class="ul-text">{{ $programmer->user->name }}</div></li>
+              @endforeach
             </ul>
           </div>
         </td>
@@ -73,9 +80,9 @@
           <div class="subtitle-space">
             <h5> Modul </h5>
             <link rel="stylesheet" href="#">
-            <a href="#" class="link-decoration"><i class="fas fa-file"></i> Modul 1</a> <br>
-            <a href="#" class="link-decoration"><i class="fas fa-file"></i> Modul 2</a> <br>
-            <a href="#" class="link-decoration"><i class="fas fa-file"></i> Modul 3</a> <br>
+            @foreach ($fiturs as $fitur_modul)
+            <a href="#" class="link-decoration"><i class="fas fa-file"></i>  {{ $fitur_modul->nama_fitur }}</a> <br>
+            @endforeach
           </div>
         </td>
       </tr>
@@ -95,10 +102,13 @@
                         Nama Fitur
                       </th>
                       <th>
-                        Nama Programmer
+                        Nama Pengunggah
                       </th>
                       <th>
-                        
+                        Tanggal Update
+                      </th>
+                      <th>
+                        {{-- Kolom Untuk Button Update --}}
                       </th>
                     </tr>
                   </thead>
@@ -109,12 +119,36 @@
                           {{ $fiturs->nama_fitur }}
                         </td>
                         <td>
-                          -
+                          <?php if($fiturs->uploader == null){ ?>
+                            -
+                            <?php 
+                            }else{ ?>
+                              {{ $fiturs->uploader }} <?php
+                            }
+                          ?>
                         </td>
                         <td>
+                          <?php if($fiturs->tgl_update == null){ ?>
+                            -
+                            <?php 
+                            }else{ 
+                              ?>
+                              {{ $fiturs->tgl_update }} <?php
+                            }
+                          ?>
+                          
+                        </td>
+                        <td align="center">
+                          <?php
+                          if($fiturs->keterangan != null){
+                            echo("<i class='fa-solid fa-check'></i> Terupdate");
+                          }else{?>
                             <a href="" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal{{$fiturs->id}}">
                             Update</a>
                           </td>
+                          <?php
+                          }
+                          ?>
                           <!-- Modal -->
 <div class="modal fade modal-lg" id="Modal{{$fiturs->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -130,6 +164,7 @@
                           @csrf
                           <div class="form-group">
                           <div class="form-floating">
+                            <input type="text" class="form-control" name="user" hidden value="{{auth()->user()->name}}">
                             <input type="text" class="form-control" name="name" id="namefitur" placeholder="Name" disabled value="{{$fiturs->nama_fitur}}">
                             <label for="floatingInput" class="modal-title">Nama Fitur</label>
                           </div>

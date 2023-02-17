@@ -42,8 +42,8 @@ class KoordinatorController extends Controller
     public function show($id){
         $project   = Project::whereId($id)->first();
         $users = User::where('role',"programmer")->get();
-        $programmer = Programmer::all();
-        $fitur = Fitur::all();
+        $programmer = Programmer::where('project_id',"$id")->get();
+        $fitur = Fitur::where('project_id',"$id")->get();
         return view('koordinator.detailverifikasi', compact('users'))->with('projects', $project)->with('programmers', $programmer)
                                                                      ->with('fiturs', $fitur) ;
 }

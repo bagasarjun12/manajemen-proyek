@@ -30621,8 +30621,12 @@ div.tagsinput span.tag a {
   margin-bottom: 40px;
 }
 
-.color-text{
+.color-blue{
   color: blue;
+}
+
+.color-green{
+  color: green;
 }
 
 .link-decoration{
