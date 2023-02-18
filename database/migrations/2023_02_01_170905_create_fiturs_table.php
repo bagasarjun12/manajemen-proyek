@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('project_id');
             $table->string('nama_fitur');
             $table->string('nama_file')->nullable();
+            $table->string('status')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('link_git')->nullable();
             $table->string('gambar')->nullable();

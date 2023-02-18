@@ -7,9 +7,9 @@ let file;
 
 //saat browse file
 input.addEventListener('change', function(){
-    file = this.files[0];
-    dragArea.classList.add('active');
-    displayfile();
+        file = this.files[0];
+        dragArea.classList.add('active');
+        displayfile();
 });
 
 // //saat file didalam drag area
@@ -50,10 +50,10 @@ function displayfile(){
             dragArea.innerHTML = imgtag;
         };  
         fileReader.readAsDataURL(file);
-    } else {
+    } else{
         alert('Harap Upload File Berupa Gambar');
         dragArea.classList.remove('active');
-        document.getElementById('#inputimg').value = '';
+        input.value = "";
     }
     // console.log('file didrop di drag area');
 };

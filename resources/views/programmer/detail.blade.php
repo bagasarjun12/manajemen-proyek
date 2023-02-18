@@ -140,7 +140,7 @@
                         </td>
                         <td align="center">
                           <?php
-                          if($fiturs->keterangan != null){
+                          if($fiturs->status == "1"){
                             echo("<i class='fa-solid fa-check'></i> Terupdate");
                           }else{?>
                             <a href="" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal{{$fiturs->id}}">
